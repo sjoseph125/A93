@@ -15,7 +15,23 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
-}
+// module.exports = (on, config) => {
+//   // `on` is used to hook into various events Cypress emits
+//   // `config` is the resolved Cypress config
+//   // htmlvalidate.install(on);
+// }
+
+const htmlvalidate = require('cypress-html-validate/dist/plugin');
+
+const htmlValidateConfig = {
+  rules: {
+    'close-order': 'error',
+    'no-conditional-comment': 0,
+    'require-sri': 0,
+    void: ['off']
+  }
+};
+
+module.exports = (on) => {
+  htmlvalidate.install(on, htmlValidateConfig);
+};
